@@ -1,0 +1,32 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const posts = require('../model/posts');
+const router = express.Router();
+
+
+router.get("/all", (req,res) =>{
+    
+    res.json(JSON.stringify(posts.getAll()));
+    
+    console.log("ok");
+});
+
+router.post("/new", bodyParser.json(), (req, res) => {
+
+        let title = req.body.title;
+        let description = req.body.description; 
+        
+        posts.newPost(title, description);
+
+        res.send("Post Adicionado");
+
+});
+
+router.delete("/delete", bodyParser.json(), (req, res) =>{
+    let id = req.body.id;
+    posts.deletePost(id);
+    res.send("Post deletado")
+
+})
+
+module.exports = router;

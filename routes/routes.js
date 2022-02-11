@@ -1,7 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const posts = require('../model/posts');
+const cors = require('cors')
 const router = express.Router();
+
+router.use(cors());
 
 
 router.get("/all", (req,res) =>{
